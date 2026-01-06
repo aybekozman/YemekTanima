@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Yemek Tarifi ve Besin Değerleri</string>
+    <string name="app_title">Yemek Tarifi Uygulaması</string>
+    <string name="upload_photo">Fotoğraf Yükle</string>
+    <string name="open_camera">Kamerayı Aç</string>
+    <string name="result_placeholder">Sonuç burada görünecek.</string>
+    <string name="food_image">Yemek Resmi</string>
+    <string name="default_notification_channel_id">default_channel</string>
+</resources>
