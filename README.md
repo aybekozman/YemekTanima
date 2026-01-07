@@ -7,19 +7,15 @@ Bu proje, kullanıcıların:
 
 ##  Özellikler
 - Firebase Authentication ile kullanıcı girişi
-- Oturum açık kalma (auto login)
 - Yapay zeka modeli ile yemek tanıma
 - Firebase Firestore’dan tarif ve besin değeri çekme
 - Arama özellikli yemek listesi
-- Modern ve sade arayüz
 
 ## Kullanılan Teknolojiler
 - **Kotlin**
 - **Android Studio**
 - **Firebase Auth**
 - **Firebase Firestore**
-- **RecyclerView**
-- **Material Design**
 
 ##  Uygulama Akışı
 1. Kullanıcı giriş yapar
