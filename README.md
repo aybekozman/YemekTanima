@@ -88,6 +88,24 @@ Seçilen yemeğin:
 
 - Besin değerleri gösterilir
 
+## 📸 Screenshots
+
+### 🔐 Kayıt Ekranı
+![Register Screen](screenshots/register_screen.png)
+
+### 🔐 Giriş Ekranı
+![Login Screen](screenshots/login_screen.png)
+
+### 🏠 Ana Menü
+![Main Menu](screenshots/main_menu.png)
+
+### 📋 Tarif Listesi
+![Recipe List](screenshots/recipe_list.png)
+
+### 🍽️ Tarif Detayı
+![Recipe Detail](screenshots/recipe_detail.png)
+
+
 
 ## 📌 Kurulum
 1. Projeyi klonlayın
