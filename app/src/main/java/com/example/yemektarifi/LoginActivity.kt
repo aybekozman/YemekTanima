@@ -16,7 +16,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var passwordEditText: EditText
     private lateinit var loginButton: Button
     private lateinit var registerTextView: TextView
-    private lateinit var forgotPasswordTextView: TextView // Şifre sıfırlama için eklendi
+    private lateinit var forgotPasswordTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,22 +28,25 @@ class LoginActivity : AppCompatActivity() {
         passwordEditText = findViewById(R.id.passwordEditText)
         loginButton = findViewById(R.id.loginButton)
         registerTextView = findViewById(R.id.registerTextView)
-        forgotPasswordTextView = findViewById(R.id.forgotPasswordTextView) // ID'yi bağladık
+        forgotPasswordTextView = findViewById(R.id.forgotPasswordTextView)
 
         loginButton.setOnClickListener {
-            val email = emailEditText.text.toString()
-            val password = passwordEditText.text.toString()
+            val email = emailEditText.text.toString().trim()
+            val password = passwordEditText.text.toString().trim()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 loginUser(email, password)
             } else {
-                Toast.makeText(this, "Lütfen geçerli bir e-posta ve şifre girin", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Lütfen geçerli bir e-posta ve şifre girin",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
         registerTextView.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
 
         forgotPasswordTextView.setOnClickListener {
@@ -52,8 +55,23 @@ class LoginActivity : AppCompatActivity() {
             if (email.isNotEmpty()) {
                 resetPassword(email)
             } else {
-                Toast.makeText(this, "Şifre sıfırlama maili için lütfen önce e-posta adresinizi girin", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Şifre sıfırlama maili için lütfen önce e-posta adresinizi girin",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
+        }
+    }
+
+    // 🔴 ASIL KRİTİK YER BURASI
+    override fun onStart() {
+        super.onStart()
+
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 
@@ -61,11 +79,14 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 } else {
-                    Toast.makeText(this, "Giriş başarısız: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "Giriş başarısız: ${task.exception?.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }
@@ -74,9 +95,17 @@ class LoginActivity : AppCompatActivity() {
         auth.sendPasswordResetEmail(email)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this, "Şifre sıfırlama bağlantısı mail adresinize gönderildi", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this,
+                        "Şifre sıfırlama bağlantısı mail adresinize gönderildi",
+                        Toast.LENGTH_LONG
+                    ).show()
                 } else {
-                    Toast.makeText(this, "Hata: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "Hata: ${task.exception?.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }
